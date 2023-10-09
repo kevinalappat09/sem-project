@@ -24,9 +24,8 @@ SECRET_KEY = 'django-insecure--r(k&i!19&m-+gb(e51n1j9j5l8*to%*%^w(awtp2x$jz0_y=*
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+STATIC_URL = '/static/'
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -37,7 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'flashcards',
 ]
+
+AUTH_USER_MODEL = 'flashcards.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,0 +1,20 @@
+{% extends "flashcards/base.html" %}
+{% block content %}
+<div class="flashcard">
+    <div class="flashcard-body">
+        {% if flashcard %}
+            <h2>Flashcard Review</h2>
+            <p>Front: {{ flashcard.flashcard_front }}</p>
+            <button id="show-answer">Show Answer</button>
+            <p id="flashcard-back" style="display: none;">Back: {{ flashcard.flashcard_back }}</p>
+            <p>{{ flashcard.next_revision_date }}</p>
+            <p>{{ flashcard.previous_revision_date }}</p>
+            <a href="{% url 'flashcards:next_flashcard' flashcard_id=flashcard.id difficulty=2 %}">Easy</a>
+            <a href="{% url 'flashcards:next_flashcard' flashcard_id=flashcard.id difficulty=1 %}">Medium</a>
+            <a href="{% url 'flashcards:next_flashcard' flashcard_id=flashcard.id difficulty=0.3 %}">Hard</a>
+        {% else %}
+            <p>No flashcard due for revision.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
