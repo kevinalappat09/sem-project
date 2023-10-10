@@ -1,0 +1,10 @@
+{% extends "flashcards/base.html" %}
+{% block content %}
+  <h2>Edit Flashcard</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Changes</button>
+  </form>
+  <a href="{% url 'flashcards:manage' %}" class="btn btn-secondary">Cancel</a>
+{% endblock %}

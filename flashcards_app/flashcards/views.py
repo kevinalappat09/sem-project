@@ -8,8 +8,10 @@ from datetime import timedelta
 
 from django.http import HttpResponseBadRequest
 
-from .forms import CustomUserRegistrationForm, CustomUserLoginForm
+from .forms import CustomUserRegistrationForm, CustomUserLoginForm, ChapterForm,SubjectForm, FlashcardForm, FlashcardEditForm
 
+
+# Home page code
 def home(request):
     subjects = []
     chapters = []
@@ -25,6 +27,7 @@ def home(request):
 
     return render(request, 'flashcards/home.html', context)
 
+# Code the registration page
 def register(request):
     if request.method == 'POST':
         form = CustomUserRegistrationForm(request.POST)
@@ -35,6 +38,7 @@ def register(request):
         form = CustomUserRegistrationForm()
     return render(request, 'flashcards/register.html', {'form': form})
 
+# Code for the login page
 def user_login(request):
     if request.method == 'POST':
         form = CustomUserLoginForm(request, data=request.POST)
@@ -46,24 +50,21 @@ def user_login(request):
         form = CustomUserLoginForm()
     return render(request, 'flashcards/login.html', {'form': form})
 
+# Logout page
 @login_required
 def user_logout(request):
     logout(request)
     return redirect('flashcards:home')  
 
+# Revision page.
 def revision(request, chapter_id):
     today = date.today()
     chapter = get_object_or_404(Chapter, id=chapter_id)
-    
-    # Get the list of flashcards due for revision for this chapter
     flashcards_to_review = Flashcard.objects.filter(
         chapter=chapter,
         next_revision_date=today
     )
-    
-    # Get the first flashcard due for revision (if any)
     flashcard_to_review = flashcards_to_review.first()
-    
     context = {
         'flashcard': flashcard_to_review,
         'chapter_id': chapter.id,
@@ -72,6 +73,7 @@ def revision(request, chapter_id):
     
     return render(request, 'flashcards/revision.html', context)
 
+# Sets the new revision schedule for a flashcard.
 @login_required
 def next_flashcard(request, flashcard_id, difficulty):
     try:
@@ -90,3 +92,74 @@ def next_flashcard(request, flashcard_id, difficulty):
         return redirect('flashcards:revision', chapter_id=flashcard.chapter.id)
     except Flashcard.DoesNotExist:
         return HttpResponseBadRequest("Flashcard does not exist.")  
+
+# Manages all the cards.
+def manage_cards(request) :
+    chapters = Chapter.objects.all()
+    selected_chapter_id = request.GET.get('chapter_id')
+
+    flashcards = []
+    if selected_chapter_id:
+        flashcards = Flashcard.objects.filter(chapter__id=selected_chapter_id)
+
+    return render(request, 'flashcards/manage.html', {
+        'chapters': chapters,
+        'flashcards': flashcards,
+        'selected_chapter_id': int(selected_chapter_id) if selected_chapter_id else None,
+    })
+
+def create_chapter(request) :
+    if request.method == 'POST' :
+        form = ChapterForm(request.POST)
+        if form.is_valid() :
+            form.save()
+            return redirect('flashcards:manage')
+    else :
+        form = ChapterForm()
+    return render(request, 'flashcards/create_chapter.html', {'form' : form})   
+
+def create_subject(request) :
+    if request.method == 'POST':
+        form = SubjectForm(request.POST)
+        if form.is_valid():
+            # Set the user before saving
+            subject = form.save(commit=False)
+            subject.user = request.user
+            subject.save()
+            return redirect('flashcards:manage')
+    else:
+        form = SubjectForm()
+    
+    return render(request, 'flashcards/create_subject.html', {'form': form})
+
+def add_flashcard(request) :
+    if request.method == 'POST' :
+        form = FlashcardForm(request.POST)
+        if form.is_valid() :
+            flashcard = form.save()
+            return redirect('flashcards:manage')
+    else :
+        form = FlashcardForm()
+    return render(request,'flashcards/add_flashcard.html',{'form':form})
+
+def edit_flashcard(request,flashcard_id) :
+    flashcard = get_object_or_404(Flashcard, id=flashcard_id)
+
+    if request.method == 'POST':
+        form = FlashcardEditForm(request.POST, instance=flashcard)
+        if form.is_valid():
+            form.save()
+            return redirect('flashcards:manage')  
+    else:
+        form = FlashcardEditForm(instance=flashcard)
+
+    return render(request, 'flashcards/edit_flashcard.html', {'flashcard': flashcard, 'form': form})
+        
+
+def delete_flashcard(request, flashcard_id) :
+    flashcard = get_object_or_404(Flashcard,id=flashcard_id)
+    if request.method == 'POST' :
+        flashcard.delete()
+        return redirect('flashcards:manage')
+    
+    return render(request,'flashcards/confirm_deletion.html',{'flashcard':flashcard})

@@ -1,0 +1,43 @@
+{% extends "flashcards/base.html" %}
+{% block content %}
+<div class="container">
+    <h2>Manage Flashcards</h2>
+    <a href="{% url 'flashcards:add_flashcard' %}" class="btn btn-primary">Add flashcard</a>
+    <a href="{% url 'flashcards:create_chapter' %}" class="btn btn-primary">Create Chapter</a>
+    <a href="{% url 'flashcards:create_subject' %}" class="btn btn-primary">Create Subject</a>
+    
+    <br><br>
+    <form method="GET">
+        <label for="chapter_select">Select Chapter:</label>
+        <select id="chapter_select" name="chapter_id">
+            <option value="" selected disabled>Select Chapter</option>
+            {% for chapter in chapters %}
+            <option value="{{ chapter.id }}" {% if chapter.id == selected_chapter_id %}selected{% endif %}>{{ chapter.subject.subject_name }} : {{ chapter.chapter_name }}</option>
+
+            {% endfor %}
+        </select>
+        <input type="submit" value="Select">
+    </form>
+    
+    {% if selected_chapter_id %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Front</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for flashcard in flashcards %}
+                    <tr>
+                        <td>{{ flashcard.flashcard_front }}</td>
+                        <td><a href="{% url 'flashcards:edit_flashcard' flashcard.id %}" class="btn btn-primary">Edit</a></td>
+                        <td><a href="{% url 'flashcards:delete_flashcard' flashcard.id %}" class="btn btn-danger">Delete</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+{% endblock %}

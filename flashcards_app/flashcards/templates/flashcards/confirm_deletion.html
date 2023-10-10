@@ -1,0 +1,12 @@
+{% extends "flashcards/base.html" %}
+{% block content %}
+  <h2>Confirm Deletion</h2>
+  <p>Are you sure you want to delete this flashcard?</p>
+  <p>Front: {{ flashcard.flashcard_front }}</p>
+  <p>Back: {{ flashcard.flashcard_back }}</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+  </form>
+  <a href="{% url 'flashcards:manage' %}" class="btn btn-secondary">Cancel</a>
+{% endblock %}
