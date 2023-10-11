@@ -45,7 +45,7 @@ def user_login(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('flashcards:home')  # Redirect to the home page or any desired page
+            return redirect('flashcards:home') 
     else:
         form = CustomUserLoginForm()
     return render(request, 'flashcards/login.html', {'form': form})
@@ -79,11 +79,9 @@ def next_flashcard(request, flashcard_id, difficulty):
     try:
         flashcard = Flashcard.objects.get(id=flashcard_id)
         
-        # Calculate the new next revision date based on the difficulty
         days_between_revisions = (flashcard.next_revision_date - flashcard.previous_revision_date).days
         new_next_revision_date = flashcard.next_revision_date + timedelta(days=(days_between_revisions * float(difficulty)))
 
-        # Update the flashcard's next revision date and previous revision date
         flashcard.next_revision_date = new_next_revision_date
         flashcard.previous_revision_date = date.today()
         flashcard.save()
@@ -122,14 +120,12 @@ def create_subject(request) :
     if request.method == 'POST':
         form = SubjectForm(request.POST)
         if form.is_valid():
-            # Set the user before saving
             subject = form.save(commit=False)
             subject.user = request.user
             subject.save()
             return redirect('flashcards:manage')
     else:
         form = SubjectForm()
-    
     return render(request, 'flashcards/create_subject.html', {'form': form})
 
 def add_flashcard(request) :
@@ -144,7 +140,6 @@ def add_flashcard(request) :
 
 def edit_flashcard(request,flashcard_id) :
     flashcard = get_object_or_404(Flashcard, id=flashcard_id)
-
     if request.method == 'POST':
         form = FlashcardEditForm(request.POST, instance=flashcard)
         if form.is_valid():
@@ -152,7 +147,6 @@ def edit_flashcard(request,flashcard_id) :
             return redirect('flashcards:manage')  
     else:
         form = FlashcardEditForm(instance=flashcard)
-
     return render(request, 'flashcards/edit_flashcard.html', {'flashcard': flashcard, 'form': form})
         
 

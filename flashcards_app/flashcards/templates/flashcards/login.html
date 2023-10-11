@@ -1,11 +1,19 @@
 {% extends "flashcards/base.html" %}
 {% block content %}
-<div class="card">
+<div class="login-card">
     <h2>Login</h2>
+    <br><hr><br>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
+        <div class="form-group">
+            <label for="{{ form.username.id_for_label }}">Username:</label>
+            {{ form.username }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.password.id_for_label }}">Password:</label>
+            {{ form.password }}
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
     </form>
     <p>Don't have an account? <a href="{% url 'flashcards:register' %}">Register here</a></p>
 </div>

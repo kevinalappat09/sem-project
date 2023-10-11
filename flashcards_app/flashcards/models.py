@@ -39,7 +39,7 @@ class Flashcard(models.Model):
     flashcard_front = models.TextField()
     flashcard_back = models.TextField()
     chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
-    previous_revision_date = models.DateField(default=date.today() - timedelta(days=1))
+    previous_revision_date = models.DateField(default=date.today() - timedelta(days=5))
     next_revision_date = models.DateField(default=date.today())
     DIFFICULTY_CHOICES = (
         ('Easy', 'Easy'),

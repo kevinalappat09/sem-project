@@ -1,27 +1,117 @@
-:root {
-    margin : 0;
-    height: 100vh;
-    width: 100%;
-    padding : 0;
+/* Reset default styles for consistency */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.content {
+/* Dark theme styles */
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+.container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
-.card {
-    margin-top: 50px;
-    padding : 20px;
+.navbar {
+    background-color: #1e1e1e;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.form-card {
-    width: 400px; 
-    margin: 0 auto; 
-    padding: 20px; 
-    border: 1px solid #ccc; 
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.navbar-links {
+    display: flex;
+}
+
+.navbar-list {
+    list-style: none;
+    display: flex;
+}
+
+.nav-item {
+    margin-right: 20px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+/* Change link color on hover */
+.nav-link:hover {
+    color: #f2f2f2;
+}
+
+/* Common card styles */
+.card {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: 1px solid #2e2e2e;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-text {
+    text-align: center;
+}
+
+.btn {
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color:#fff;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Additional styles for specific components */
+
+/* Login card */
+.login-card {
+    width: 50%;
+    margin: 20px auto;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
 .form-group {
@@ -29,31 +119,67 @@
 }
 
 label {
-    display: block; 
     font-weight: bold;
 }
 
+/* Textarea and Select */
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #2e2e2e;
+    border-radius: 4px;
+    background-color: #2e2e2e;
+    color: #ffffff;
+}
+
+/* Table styles */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1e1e1e;
+}
+
+.custom-table th,
+.custom-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #2e2e2e;
+}
+
+.custom-table th {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.custom-table tbody tr:nth-child(odd) {
+    background-color: #2e2e2e;
+}
+
+.custom-table tbody tr:hover {
+    background-color: #444444;
+}
+
+label {
+    color: #ffffff; /* Label text color */
+    font-weight: bold; /* Bold label text */
+}
 
 input[type="text"],
 input[type="password"],
 input[type="email"] {
-    width: 100%;
-    padding: 10px; 
-    border: 1px solid #ccc;
-    border-radius: 4px; 
+    width: 100%; /* Input field width */
+    padding: 10px; /* Padding inside input field */
+    border: 1px solid #2e2e2e; /* Dark input field border */
+    border-radius: 4px; /* Rounded corners for input field */
+    background-color: #2e2e2e; /* Dark input field background color */
+    color: #ffffff; /* Light text color inside input field */
 }
 
-button[type="submit"] {
-    display: block;
-    width: 100%; 
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none; 
-    border-radius: 4px; 
-    cursor: pointer; 
-}
-
-button[type="submit"]:hover {
-    background-color: #0056b3;
+.home-card { 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

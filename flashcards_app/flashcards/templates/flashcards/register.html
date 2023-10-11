@@ -1,17 +1,18 @@
 {% extends "flashcards/base.html" %}
 {% block content %}
-<div class="card form-card">
+<div class="login-card">
     <h1>Register</h1>
+    <br><hr><br>
     <form method="post">
         {% csrf_token %}
         {% for field in form %}
         <div class="form-group">
-            {{ field.label_tag }} {{ field }}
+            <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+            {{ field }}
             {{ field.errors }}
         </div>
-        
         {% endfor %}
-        <button type="submit">Register</button>
+        <button type="submit" class="btn btn-primary">Register</button>
     </form>
 </div>
 {% endblock %}

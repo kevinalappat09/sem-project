@@ -1,34 +1,27 @@
 {% extends 'flashcards/base.html' %}
 
 {% block content %}
-    <div class="card">
-        <div class="card-body">
-            {% if user.is_authenticated %}
-                <h2>Your Subjects</h2>
-                <ul>
-                    {% for subject in subjects %}
-                        <li>
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#subject{{ subject.id }}">
-                                {{ subject.subject_name }}
-                            </button>
-                            <div id="subject{{ subject.id }}" class="collapse">
-                                <ul>
-                                    {% for chapter in chapters %}
-                                        {% if chapter.subject == subject %}
-                                            <li>
-                                                <a href="{% url 'flashcards:revision' chapter.id %}">{{ chapter.chapter_name }}</a>
-                                            </li>
-                                        {% endif %}
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>Please <a href="{% url 'flashcards:login' %}">log in</a> to view your subjects.</p>
-                <a href="{% url 'flashcards:login' %}" class="btn btn-primary">Log In</a>
-            {% endif %}
+<div class="card-container">
+    <div class="row">
+        {% if user.is_authenticated %}
+            {% for chapter in chapters %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ chapter.subject.subject_name }} : {{ chapter.chapter_name }}</h5>
+                        <p class="card-text">
+                            <a href="{% url 'flashcards:revision' chapter.id %}" class="btn btn-primary">Go to Revision</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+        <div class="card mb-4 home-card">
+            <p>Please <a href="{% url 'flashcards:login' %}">log in</a> to view your chapters.</p>
+            <a href="{% url 'flashcards:login' %}" class="btn btn-primary">Log In</a>
         </div>
+        {% endif %}
     </div>
+</div>
 {% endblock %}
