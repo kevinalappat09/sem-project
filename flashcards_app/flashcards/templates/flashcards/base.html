@@ -4,39 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Flashcards Website</title>
+    <title>QuickCards</title>
+
+    <!-- Style sheet -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="container">
-            <a class="navbar-brand" href="{% url 'flashcards:home' %}">Flashcards</a>
-            <div class="navbar-links">
-                <ul class="navbar-list">
+    <div class="navbar">
+        <div class="nav-header">
+            <i class="material-icons md-header">style</i>
+            <h3 class="nav-header-text">QuickCards</h3>
+        </div>
+        <div class="nav-content">
+            <div class="nav-center">
+                <ul class="nav-button-cluster">
+                    <li class="nav-item"><a class="nav-item-link" href="{% url 'flashcards:home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-item-link" href="{% url 'flashcards:home' %}">Blog</a></li>
+                    <li class="nav-item"><a class="nav-item-link" href="{% url 'flashcards:home' %}">About</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <ul class="nav-button-cluster">
                     {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'flashcards:manage' %}">Manage Cards</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'flashcards:home' %}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'flashcards:logout' %}">Logout</a>
-                        </li>
-                    {% else %}  
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'flashcards:login' %}">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'flashcards:register' %}">Sign Up</a>
-                        </li>
-                    {% endif %}
+                        <li class="nav-item"><a class="nav-item-link" href="{% url 'flashcards:logout' %}">Logout</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-item-link" href="{% url 'flashcards:login' %}">Login</a></li>
+                        <li class="nav-item"><a class="nav-item-link" href="{% url 'flashcards:register' %}">Register</a></li> 
+                    {% endif %}    
                 </ul>
             </div>
         </div>
-    </nav>
-    <div class="content">
-        {% block content %} {% endblock %}
     </div>
+
+    {% block content %} {% endblock %}
 </body>
 </html>
