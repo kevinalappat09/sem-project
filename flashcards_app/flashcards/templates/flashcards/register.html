@@ -1,18 +1,24 @@
 {% extends "flashcards/base.html" %}
 {% block content %}
-<div class="login-card">
-    <h1>Register</h1>
-    <br><hr><br>
-    <form method="post">
-        {% csrf_token %}
-        {% for field in form %}
-        <div class="form-group">
-            <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
-            {{ field }}
-            {{ field.errors }}
+<div class="main-content" id="form-content">
+    <div class="form-card">
+        <div class="form-header">
+            Register!
         </div>
-        {% endfor %}
-        <button type="submit" class="btn btn-primary">Register</button>
-    </form>
+        <div class="form-content">
+            <form action="" class="form">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group">
+                    <label for="{{field.id_for_label}}">{{ field.label_tag }}</label>
+                    {{field}}
+                    {{field.errors}}
+                </div>
+                {% endfor %}
+                <button type="submit" class="form-submit-btn">Register</button>
+                <a href="{% url 'flashcards:login' %}" class="form-link">Already have an account?</a>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}

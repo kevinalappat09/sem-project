@@ -1,3 +1,4 @@
+from typing import Any
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import CustomUser, Chapter, Subject, Flashcard
@@ -12,9 +13,30 @@ class CustomUserRegistrationForm(UserCreationForm):
         model = CustomUser
         fields = ['username', 'email', 'password1', 'password2', 'first_name', 'last_name', 'phone_number', 'gender', 'college']
 
+    def __init__(self, *args, **kwargs) :
+        super(CustomUserRegistrationForm,self).__init__(*args, **kwargs)
+
+        self.fields['username'].widget.attrs.update({'class':'form-input'})
+        self.fields['email'].widget.attrs.update({'class':'form-input'})
+        self.fields['password1'].widget.attrs.update({'class':'form-input'})
+        self.fields['password2'].widget.attrs.update({'class':'form-input'})
+        self.fields['first_name'].widget.attrs.update({'class':'form-input'})
+        self.fields['last_name'].widget.attrs.update({'class':'form-input'})
+        self.fields['phone_number'].widget.attrs.update({'class':'form-input'})
+        self.fields['gender'].widget.attrs.update({'class':'form-input'})
+        self.fields['college'].widget.attrs.update({'class':'form-input'})
+
 class CustomUserLoginForm(AuthenticationForm):
     class Meta:
         model = CustomUser
+        fields = ['username','password']
+    
+    def __init__(self, *args, **kwargs):
+        super(CustomUserLoginForm,self).__init__(*args, **kwargs)
+
+        self.fields['username'].widget.attrs.update({'class':'form-input'})
+        self.fields['password'].widget.attrs.update({'class':'form-input'})
+
 
 class ChapterForm(forms.ModelForm) :
     class Meta : 
