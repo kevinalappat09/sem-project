@@ -30,10 +30,8 @@ class CustomUserLoginForm(AuthenticationForm):
     class Meta:
         model = CustomUser
         fields = ['username','password']
-    
     def __init__(self, *args, **kwargs):
         super(CustomUserLoginForm,self).__init__(*args, **kwargs)
-
         self.fields['username'].widget.attrs.update({'class':'form-input'})
         self.fields['password'].widget.attrs.update({'class':'form-input'})
 
@@ -42,11 +40,22 @@ class ChapterForm(forms.ModelForm) :
     class Meta : 
         model = Chapter
         fields = ['chapter_name','subject']
+    def __init__(self,*args,**kwargs) :
+        super(ChapterForm,self).__init__(*args,**kwargs)
+        self.fields['chapter_name'].widget.attrs.update({'class':'form-input'})
+        self.fields['subject'].widget.attrs.update({'class':'form-dropdown'})
 
 class SubjectForm(forms.ModelForm) :
     class Meta:
         model = Subject
         fields = ['subject_name', 'subject_code', 'subject_credits', 'faculty_name']
+
+    def __init__(self,*args,**kwargs) :
+        super(SubjectForm,self).__init__(*args,**kwargs)
+        self.fields['subject_name'].widget.attrs.update({'class':'form-input'})
+        self.fields['subject_code'].widget.attrs.update({'class':'form-input'})
+        self.fields['subject_credits'].widget.attrs.update({'class':'form-input'})
+        self.fields['faculty_name'].widget.attrs.update({'class':'form-input'})
 
     def save(self, commit=True, user=None):
         instance = super().save(commit=False)

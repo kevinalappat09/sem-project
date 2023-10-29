@@ -1,16 +1,23 @@
 {% extends "flashcards/base.html" %}
 {% block content %}
-    <div class="login-card">
-        <h2>Create Chapter</h2>
-        <form method="post">
-            {% csrf_token %}
-            {% for field in form %}
-            <div class="form-group">
-                {{ field.label_tag }} {{ field }}
-                {{ field.errors }}
+    <div class="main-content" id="form-content">
+        <div class="form-card">
+            <div class="form-header">
+                Create Chapter
             </div>
-            {% endfor %}
-            <button type="submit" class="btn btn-primary">Create Chapter</button>
-        </form>
+            <div class="form-content">
+                <form action="" method="post" class="form">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label for="{{field.id_for_label}}">{{ field.label_tag }}</label>
+                            {{field}}
+                            {{field.errors}}
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="form-submit-btn">Create Chapter</button>
+                </form>
+            </div>
+        </div>
     </div>
 {% endblock %}
