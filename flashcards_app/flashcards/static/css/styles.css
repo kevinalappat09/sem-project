@@ -305,3 +305,20 @@ body {
     padding: 16px;
     border-radius: 32px;
 }
+
+.form-dropdown {
+    height: 2.5rem;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid var(--accent);
+    background-color: var(--secondary);
+
+    transition: 400ms;
+}
+
+.form-dropdown:focus {
+    border: none;
+    outline: none;
+
+    border-bottom: 1px solid var(--pink);
+}

@@ -1,22 +1,23 @@
 {% extends "flashcards/base.html" %}
 {% block content %}
-    <div class="login-card">
-        <h2>Add Flashcard</h2>
-        <form method="post">
-            {% csrf_token %}
-            <div class="form-group">
-                {{ form.flashcard_front.label_tag }} {{ form.flashcard_front }}
-                {{ form.flashcard_front.errors }}
+    <div class="main-content" id="form-content">
+        <div class="form-card">
+            <div class="form-header">
+                Add Flashcard
             </div>
-            <div class="form-group">
-                {{ form.flashcard_back.label_tag }} {{ form.flashcard_back }}
-                {{ form.flashcard_back.errors }}
+            <div class="form-content">
+                <form action="" method="post" class="form">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label for="{{field.id_for_label}}">{{ field.label_tag }}</label>
+                            {{field}}
+                            {{field.errors}}
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="form-submit-btn">Add Flashcard</button>
+                </form>
             </div>
-            <div class="form-group">
-                {{ form.chapter.label_tag }} {{ form.chapter }}
-                {{ form.chapter.errors }}
-            </div>
-            <button type="submit" class="btn btn-primary">Add Flashcard</button>
-        </form>
+        </div>
     </div>
 {% endblock %}

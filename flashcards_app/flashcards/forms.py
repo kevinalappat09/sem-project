@@ -63,6 +63,9 @@ class FlashcardForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['flashcard_front'].widget.attrs.update({'class':'form-input'})
+        self.fields['flashcard_back'].widget.attrs.update({'class':'form-input'})
+        self.fields['chapter'].widget.attrs.update({'class':'form-dropdown'})
         
         # Set the initial values for previous_revision_date, next_revision_date, and difficulty_level
         from datetime import date, timedelta

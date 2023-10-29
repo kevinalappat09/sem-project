@@ -10,6 +10,7 @@
                         <div class="card-heading">
                             <!-- TO DO - use javascript to make this clickable to take you to revision. -->
                             <h4 class="chapter-card-heading">{{ chapter.subject.subject_name }} : {{ chapter.chapter_name }}</h4>
+                            <a href="{% url 'flashcards:revision' chapter.id %}">{{ chapter.chapter_name }}</a>
                         </div>
                         <div class="card-count">
                             <p>Revise : 5</p>
