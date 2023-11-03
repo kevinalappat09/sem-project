@@ -16,11 +16,19 @@ class CustomUser(AbstractUser):
 
 
 class Subject(models.Model):
+    COLOR_CHOICES = (
+        ('red', 'red'),
+        ('blue', 'blue'),
+        ('green', 'green'),
+        ('yellow', 'yellow'),
+        ('pink', 'pink'),
+    )
     subject_name = models.CharField(max_length=100)
     subject_code = models.CharField(max_length=20, unique=True)
     subject_credits = models.PositiveIntegerField()
     faculty_name = models.CharField(max_length=100)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    color = models.CharField(max_length=10, choices=COLOR_CHOICES, default='red')
 
     def __str__(self):
         return self.subject_name
@@ -28,8 +36,10 @@ class Subject(models.Model):
 
 
 class Chapter(models.Model):
+    
     chapter_name = models.CharField(max_length=100)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+
     
     def __str__(self):
         return self.chapter_name

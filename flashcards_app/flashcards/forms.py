@@ -45,17 +45,31 @@ class ChapterForm(forms.ModelForm) :
         self.fields['chapter_name'].widget.attrs.update({'class':'form-input'})
         self.fields['subject'].widget.attrs.update({'class':'form-dropdown'})
 
-class SubjectForm(forms.ModelForm) :
+class SubjectForm(forms.ModelForm):
+    COLOR_CHOICES = (
+        ('red', 'Red'),
+        ('blue', 'Blue'),
+        ('green', 'Green'),
+        ('yellow', 'Yellow'),
+        ('pink', 'Pink'),
+    )
+
+    subject_color = forms.ChoiceField(
+        label='Subject Color',
+        choices=COLOR_CHOICES,
+        widget=forms.Select(attrs={'class': 'form-input'})
+    )
+
     class Meta:
         model = Subject
         fields = ['subject_name', 'subject_code', 'subject_credits', 'faculty_name']
 
-    def __init__(self,*args,**kwargs) :
-        super(SubjectForm,self).__init__(*args,**kwargs)
-        self.fields['subject_name'].widget.attrs.update({'class':'form-input'})
-        self.fields['subject_code'].widget.attrs.update({'class':'form-input'})
-        self.fields['subject_credits'].widget.attrs.update({'class':'form-input'})
-        self.fields['faculty_name'].widget.attrs.update({'class':'form-input'})
+    def __init__(self, *args, **kwargs):
+        super(SubjectForm, self).__init__(*args, **kwargs)
+        self.fields['subject_name'].widget.attrs.update({'class': 'form-input'})
+        self.fields['subject_code'].widget.attrs.update({'class': 'form-input'})
+        self.fields['subject_credits'].widget.attrs.update({'class': 'form-input'})
+        self.fields['faculty_name'].widget.attrs.update({'class': 'form-input'})
 
     def save(self, commit=True, user=None):
         instance = super().save(commit=False)

@@ -13,6 +13,7 @@
                             <a href="{% url 'flashcards:revision' chapter.id %}">{{ chapter.chapter_name }}</a>
                         </div>
                         <div class="card-count">
+                            {{ chapter.subject.color }}
                             <p>Revise : 5</p>
                             <p>Total : 63</p>
                         </div>
@@ -88,28 +89,6 @@
                     </div>
                     <div class="review-quote-human">- Human Being</div>
                 </div>
-            </div>
-
-            <div class="banner">
-                <div class="banner-content">
-                    <div class="banner-heading">
-                        Unlock your potential or something!
-                    </div>
-                    <div class="banner-subheading">
-                        More bragging about the project.Nothing else just bragging.
-                    </div>
-                    <!-- Copy upar wala button -->
-                    <button><a href="">Get Started</a></button>
-                </div>
-                <div class="banner-image">
-                    <div class="banner-heading">
-                        Unlock your potential or something!
-                    </div>
-                    <div class="banner-subheading">
-                        More bragging about the project.Nothing else just bragging.
-                    </div>
-                </div>
-                
             </div>
         </div>
     {% endif %}
