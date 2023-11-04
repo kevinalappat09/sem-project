@@ -77,6 +77,11 @@ body {
     color: var(--accent);
 }
 
+.icon-link {
+    text-decoration: none;
+    color: #0a0a0a;
+}
+
 /* Home Page Content */
 .main-content {
     padding: 16px 64px;
@@ -102,9 +107,13 @@ body {
 
 .general-button {
     background-color: var(--red);
-    padding: 16px 16px;
-    margin-right: 32px;
-    border-radius: 64px;
+    display: flex;
+    padding: 12px 20px;
+    align-items: center;
+    gap: 16px; 
+    border-radius: 30px;
+    border: 2px solid var(--red); 
+
     transition: 400ms;
 }
 
@@ -323,3 +332,45 @@ body {
     border-bottom: 1px solid var(--pink);
 }
 
+.manage-content {
+    padding-top: 32px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+}
+
+.button-group { 
+    display: flex;
+    gap: 64px;
+}
+
+.input-button {
+    background-color: red;
+    background-color: var(--red);
+    color: var(--primary);
+    font-weight: 700;
+    padding: 12px 20px;
+    align-items: center;    
+    border-radius: 30px;
+    border: 2px solid var(--red); 
+}
+
+.list {
+    display :flex;
+    flex-direction: column;
+    align-items: center;
+}
+.list-heading {
+    font-size: 36px;
+} 
+
+.table-r1 {
+    padding: 12px;
+}
+
+#chapter_select {
+    background-color: var(--primary);
+    
+}

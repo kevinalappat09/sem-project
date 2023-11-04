@@ -41,6 +41,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+SUBJECT_COLOR_BACKGROUND_IMAGES = {
+    'red': '/static/images/red_card_bg.png',
+    'blue': '/static/images/blue_card_bg.png',
+    'green': '/static/images/green_card_bg.png',
+    'orange': '/static/images/orange_card_bg.png',
+    'pink': '/static/images/pink_card_bg.png',
+}
+
 ROOT_URLCONF = 'flashcards_app.urls'
 
 TEMPLATES = [

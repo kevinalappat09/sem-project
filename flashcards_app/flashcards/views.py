@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Subject, Chapter, Flashcard
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
 from datetime import date
 from datetime import timedelta
@@ -19,10 +20,19 @@ def home(request):
     if request.user.is_authenticated:
         subjects = Subject.objects.filter(user=request.user)
         chapters = Chapter.objects.filter(subject__in=subjects)
+
+    color_image_mapping = [
+        ('color1', settings.SUBJECT_COLOR_BACKGROUND_IMAGES['color1']),
+        ('color2', settings.SUBJECT_COLOR_BACKGROUND_IMAGES['color2']),
+        ('color3', settings.SUBJECT_COLOR_BACKGROUND_IMAGES['color3']),
+        ('color4', settings.SUBJECT_COLOR_BACKGROUND_IMAGES['color4']),
+        ('color5', settings.SUBJECT_COLOR_BACKGROUND_IMAGES['color5']),
+    ]
     
     context = {
         'subjects': subjects,
         'chapters': chapters,
+        'color_image_mapping': color_image_mapping,
     }
 
     return render(request, 'flashcards/home.html', context)

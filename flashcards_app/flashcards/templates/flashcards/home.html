@@ -2,25 +2,26 @@
 {% block content %}
 <div class="main-content">
     {% if user.is_authenticated %}
-        <h3 class="main-content-heading">Your chapters : </h3>
-        <div class="chapters-list">
-            {% for chapter in chapters %}
-                <div class="chapter-card-container">
-                    <div class="chapter-card">
-                        <div class="card-heading">
-                            <!-- TO DO - use javascript to make this clickable to take you to revision. -->
-                            <h4 class="chapter-card-heading">{{ chapter.subject.subject_name }} : {{ chapter.chapter_name }}</h4>
-                            <a href="{% url 'flashcards:revision' chapter.id %}">{{ chapter.chapter_name }}</a>
-                        </div>
-                        <div class="card-count">
-                            {{ chapter.subject.color }}
-                            <p>Revise : 5</p>
-                            <p>Total : 63</p>
-                        </div>
+    <h3 class="main-content-heading">Your chapters :</h3>
+    <div class="chapters-list">
+        {% for chapter in chapters %}
+        <div class="chapter-card-container" style="background-image: url({{ settings.SUBJECT_COLOR_BACKGROUND_IMAGES|get_background_image_url:chapter.subject.color }})">
+
+                <div class="chapter-card">
+                    <div class="card-heading">
+                        <h4 class="chapter-card-heading">{{ chapter.subject.subject_name }} : {{ chapter.chapter_name }}</h4>
+                        <a href="{% url 'flashcards:revision' chapter.id %}">{{ chapter.chapter_name }}</a>
+                    </div>
+                    <div class="card-count">
+                        {{ chapter.subject.color }}
+                        <p>Revise : 5</p>
+                        <p>Total : 63</p>
                     </div>
                 </div>
-            {% endfor %}    
-        </div> 
+            </div>
+        {% endfor %}    
+    </div>
+     
     {% else %}
         <div class="marketing-content-container">
             <div class="hero">
