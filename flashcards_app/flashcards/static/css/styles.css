@@ -15,6 +15,7 @@ body {
     font-family: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+
 /* Navbar Styles */
 .navbar {
     display: flex;
@@ -113,6 +114,7 @@ body {
     gap: 16px; 
     border-radius: 30px;
     border: 2px solid var(--red); 
+    color: var(--primary);
 
     transition: 400ms;
 }
@@ -242,6 +244,12 @@ body {
     grid-template-areas: 
     "title title"
     "count count";
+
+    transition: 400ms;
+}
+
+.chapter-card:hover {
+    transform: translateY(-3px);
 }
 
 .chapter-card-heading {
@@ -319,6 +327,11 @@ body {
     border: none;
     padding: 16px;
     border-radius: 32px;
+    transition: 400ms;
+}
+
+.form-submit-btn:hover {
+    transform: translateY(-3px);
 }
 
 .form-dropdown {
@@ -380,3 +393,100 @@ body {
     background-color: var(--primary);
     
 }
+
+.revision-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+/* CSS for the card flip animation */
+.flashcard {
+    perspective: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    gap: 32px;
+}
+
+.flashcard-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    width: 40%;
+    min-height: 30vh;
+    padding: 20px;
+    border-radius: 32px;
+    background-color: #dc2626;
+    color: #fafafa;
+    transition: transform 0.5s; /* Added for flip animation */
+    transform-style: preserve-3d;
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+    font-weight: 700;
+}
+
+.flashcard-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+.flashcard-front-content {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.flashcard-back-content {
+    font-size: 32px;
+    color: var(--accent);
+}
+
+.flashcard-back {
+    transform: rotateY(180deg);
+    transform-origin: center;
+    backface-visibility: hidden;
+    display: none;
+    border: 5px solid #dc2626;
+    background-color: #fafafa;
+}
+
+#easy-button {
+    background-color: #22c55e;
+    border: 1px solid #22c55e;
+}
+
+#medium-button {
+    background-color: #fbbf24;
+    border: 1px solid #fbbf24;
+}
+
+#hard-button {
+    background-color: #dc2626;
+    border: 1px solid #dc2626;
+}
+
+.noflashcard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    font-weight: 700;
+    border: 1px solid #dc2626;
+    background-color: #dc2626;
+    width: 30%;
+    height: 30vh;
+    border-radius: 48px;
+}
+

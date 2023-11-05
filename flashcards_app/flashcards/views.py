@@ -116,14 +116,15 @@ def manage_cards(request) :
     })
 
 def create_chapter(request) :
-    if request.method == 'POST' :
-        form = ChapterForm(request.POST)
-        if form.is_valid() :
-            form.save()
+    if request.method == 'POST':
+        form = ChapterForm(request.user, request.POST)
+        if form.is_valid():
+            # Process the form data
+            chapter = form.save()
             return redirect('flashcards:manage')
-    else :
-        form = ChapterForm()
-    return render(request, 'flashcards/create_chapter.html', {'form' : form})   
+    else:
+        form = ChapterForm(request.user)
+    return render(request, 'flashcards/create_chapter.html', {'form': form}) 
 
 def create_subject(request) :
     if request.method == 'POST':
@@ -137,15 +138,15 @@ def create_subject(request) :
         form = SubjectForm()
     return render(request, 'flashcards/create_subject.html', {'form': form})
 
-def add_flashcard(request) :
-    if request.method == 'POST' :
-        form = FlashcardForm(request.POST)
-        if form.is_valid() :
+def add_flashcard(request):
+    if request.method == 'POST':
+        form = FlashcardForm(request.user, request.POST)
+        if form.is_valid():
             flashcard = form.save()
             return redirect('flashcards:manage')
-    else :
-        form = FlashcardForm()
-    return render(request,'flashcards/add_flashcard.html',{'form':form})
+    else:
+        form = FlashcardForm(request.user)
+    return render(request, 'flashcards/add_flashcard.html', {'form': form})
 
 def edit_flashcard(request,flashcard_id) :
     flashcard = get_object_or_404(Flashcard, id=flashcard_id)

@@ -1,109 +1,71 @@
 {% extends "flashcards/base.html" %}
 {% block content %}
-<div class="flashcard">
-    <div class="flashcard-body">
-        {% if flashcard %}
-            <h2>Flashcard Review</h2>
-            <p>Front: {{ flashcard.flashcard_front }}</p>
-            
-            <p id="flashcard-back" style="display: none;">Back: {{ flashcard.flashcard_back }}</p>
-            
-            <button id="show-answer" class="btn btn-primary">Show Answer</button>
-            <div class="button-group">
-                <a href="{% url 'flashcards:next_flashcard' flashcard_id=flashcard.id difficulty=2 %}" class="btn btn-success">Easy</a>
-                <a href="{% url 'flashcards:next_flashcard' flashcard_id=flashcard.id difficulty=1 %}" class="btn btn-warning">Medium</a>
-                <a href="{% url 'flashcards:next_flashcard' flashcard_id=flashcard.id difficulty=0.3 %}" class="btn btn-danger">Hard</a>
-            </div>
-        {% else %}
-            <p>No flashcard due for revision.</p>
-        {% endif %}
+<div class="main-content revision-content">
+    <div class="heading">
+        Revision
     </div>
+    {% if flashcard %}
+    <div class="flashcard">
+        <div class="flashcard-body flashcard-front">
+            <div class="card-top">
+                <div class="card-subject">{{ flashcard.chapter.subject.subject_name }}</div>
+                <div class="card-chapter">{{ flashcard.chapter.chapter_name }}</div>
+            </div>
+            <div class="flashcard-content">
+                <div class="flashcard-front-content">
+                    {{ flashcard.flashcard_front }}
+                </div>
+            </div>
+        </div>
+
+        <div class="flashcard-body flashcard-back" id="flashcard-back">
+            <div class="flashcard-content">
+                <div class="flashcard-front-content">
+                    {{ flashcard.flashcard_front }}
+                </div>
+                <div class="flashcard-back-content">
+                    {{ flashcard.flashcard_back }}
+                </div>
+            </div>
+        </div>
+
+        <div class="show-answer-btn">
+            <button class="general-button" id="show-answer">Show Answer</button>
+        </div>
+        <div class="button-group" style="display: none;">
+            <button class="general-button" id="easy-button"><a href="{% url 'flashcards:next_flashcard' flashcard_id=flashcard.id difficulty=2 %}" class="general-button-link">Easy</a></button>
+            <button class="general-button" id="medium-button"><a href="{% url 'flashcards:next_flashcard' flashcard_id=flashcard.id difficulty=1 %}" class="general-button-link">Medium</a></button>
+            <button class="general-button" id="hard-button"><a href="{% url 'flashcards:next_flashcard' flashcard_id=flashcard.id difficulty=0.3 %}" class="general-button-link">Hard</a></button>  
+        </div>
+    </div>
+    {% else %}
+    <div class="noflashcard">
+        No Flashcards To Revise
+    </div>
+    <button class="general-button"><a href="{% url 'flashcards:home' %}" class="general-button-link">Go Back</a></button>
+    {% endif %}
 </div>
-
-<style>
-    /* Custom CSS Styles */
-.flashcard {
-    margin: 20px;
-    padding: 20px;
-    background-color: #121212; /* Dark background color */
-    color: #ffffff; /* Light text color */
-    border: 1px solid #2e2e2e; /* Dark border */
-    border-radius: 8px; /* Rounded corners for container */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Container shadow */
-    display: flex;
-    justify-content: center;
-    height: 80vh;
-}
-
-.flashcard-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.button-group {
-    display: flex;
-    gap : 16px;
-}
-
-.btn {
-    background-color: #007bff; /* Primary button color */
-    color: #fff; /* Button text color */
-    border: none; /* Remove button border */
-    border-radius: 4px; /* Rounded corners for button */
-    padding: 8px 16px; /* Padding inside button */
-    text-decoration: none; /* Remove button underline */
-    cursor: pointer; /* Change cursor on hover */
-}
-
-.btn-primary:hover {
-    background-color: #0056b3; /* Button color on hover */
-}
-
-.btn-success {
-    background-color: #28a745; /* Success button color */
-}
-
-.btn-success:hover {
-    background-color: #218838; /* Success button color on hover */
-}
-
-.btn-warning {
-    background-color: #ffc107; /* Warning button color */
-}
-
-.btn-warning:hover {
-    background-color: #e0a800; /* Warning button color on hover */
-}
-
-.btn-danger {
-    background-color: #dc3545; /* Danger button color */
-}
-
-.btn-danger:hover {
-    background-color: #c82333; /* Danger button color on hover */
-}
-
-#show-answer {
-    margin-top: 10px;
-}
-
-#flashcard-back {
-    display: none;
-    margin-top: 10px;
-}
-
-</style>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
     const showAnswerButton = document.getElementById("show-answer");
-    const flashcardBack = document.getElementById("flashcard-back");
-    
+    const flashcardFront = document.querySelector('.flashcard-front');
+    const flashcardBack = document.querySelector('.flashcard-back');
+    const buttonGroup = document.querySelector('.button-group');
+    const showAnswerBtn = document.querySelector('.show-answer-btn');
+
     showAnswerButton.addEventListener("click", function() {
+        flashcardFront.style.transform = "rotateY(180deg)";
+        flashcardBack.style.transform = "rotateY(0deg)";
+        flashcardFront.style.display = "none";
         flashcardBack.style.display = "block";
+
+        buttonGroup.style.display = "flex";
+        showAnswerBtn.style.display = "none";
+        
     });
 });
+
+
 </script>
 {% endblock %}

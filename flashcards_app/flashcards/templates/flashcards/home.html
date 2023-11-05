@@ -2,7 +2,6 @@
 {% block content %}
 <div class="main-content">
     {% if user.is_authenticated %}
-    <h3 class="main-content-heading">Your chapters :</h3>
     <div class="chapters-list">
         {% for chapter in chapters %}
         <div class="chapter-card-container" id="chapter-container-{{ chapter.id }}" data-color="{{ chapter.subject.color }}">

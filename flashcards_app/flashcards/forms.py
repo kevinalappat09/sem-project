@@ -36,14 +36,19 @@ class CustomUserLoginForm(AuthenticationForm):
         self.fields['password'].widget.attrs.update({'class':'form-input'})
 
 
-class ChapterForm(forms.ModelForm) :
-    class Meta : 
+class ChapterForm(forms.ModelForm):
+    class Meta:
         model = Chapter
-        fields = ['chapter_name','subject']
-    def __init__(self,*args,**kwargs) :
-        super(ChapterForm,self).__init__(*args,**kwargs)
-        self.fields['chapter_name'].widget.attrs.update({'class':'form-input'})
-        self.fields['subject'].widget.attrs.update({'class':'form-dropdown'})
+        fields = ['chapter_name', 'subject']
+
+    def __init__(self, user, *args, **kwargs):
+        super(ChapterForm, self).__init__(*args, **kwargs)
+        self.fields['chapter_name'].widget.attrs.update({'class': 'form-input'})
+        self.fields['subject'].widget.attrs.update({'class': 'form-dropdown'})
+
+        # Filter the subjects based on the user
+        if user.is_authenticated:
+            self.fields['subject'].queryset = Subject.objects.filter(user=user)
 
 class SubjectForm(forms.ModelForm):
     COLOR_CHOICES = (
@@ -84,11 +89,14 @@ class FlashcardForm(forms.ModelForm):
         model = Flashcard
         fields = ['flashcard_front', 'flashcard_back', 'chapter']
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['flashcard_front'].widget.attrs.update({'class':'form-input'})
-        self.fields['flashcard_back'].widget.attrs.update({'class':'form-input'})
-        self.fields['chapter'].widget.attrs.update({'class':'form-dropdown'})
+    def __init__(self, user, *args, **kwargs):
+        super(FlashcardForm, self).__init__(*args, **kwargs)
+        self.fields['flashcard_front'].widget.attrs.update({'class': 'form-input'})
+        self.fields['flashcard_back'].widget.attrs.update({'class': 'form-input'})
+        self.fields['chapter'].widget.attrs.update({'class': 'form-dropdown'})
+
+        # Filter the chapter queryset to show only the user's chapters
+        self.fields['chapter'].queryset = Chapter.objects.filter(subject__user=user)
         
         # Set the initial values for previous_revision_date, next_revision_date, and difficulty_level
         from datetime import date, timedelta
@@ -101,6 +109,7 @@ class FlashcardForm(forms.ModelForm):
         
         # Set difficulty_level to "Easy"
         self.initial['difficulty_level'] = 'Easy'
+
 
 class FlashcardEditForm(forms.ModelForm) :
     class Meta :
