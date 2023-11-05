@@ -223,14 +223,10 @@ body {
 
 .chapters-list {
     display : flex;
-    justify-content: space-between;
     flex-wrap: wrap;
     gap: 32px;
 }
 
-.chapter-card-container {
-    border-radius: 128px;
-}
 
 .chapter-card {
     background-color: var(--secondary);
@@ -238,13 +234,14 @@ body {
     width: 360px;
     height: 180px;
     padding: 32px;
+    border-radius: 32px;
     
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     grid-template-areas: 
     "title title"
-    "empty count";
+    "count count";
 }
 
 .chapter-card-heading {
@@ -252,9 +249,18 @@ body {
     grid-area: title;
 }
 
+.card-heading-chapter {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.card-revision-count {
+    font-weight: 700;
+    color: var(--accent);
+}
+
 .card-count {
     grid-area: count;
-    justify-self: end;
     padding: 0;
 }
 

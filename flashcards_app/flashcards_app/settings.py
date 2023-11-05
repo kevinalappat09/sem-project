@@ -41,13 +41,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-SUBJECT_COLOR_BACKGROUND_IMAGES = {
-    'red': '/static/images/red_card_bg.png',
-    'blue': '/static/images/blue_card_bg.png',
-    'green': '/static/images/green_card_bg.png',
-    'orange': '/static/images/orange_card_bg.png',
-    'pink': '/static/images/pink_card_bg.png',
-}
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 ROOT_URLCONF = 'flashcards_app.urls'
 
@@ -115,8 +110,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'flashcards/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

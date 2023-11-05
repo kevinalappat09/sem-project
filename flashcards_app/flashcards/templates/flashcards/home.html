@@ -5,17 +5,14 @@
     <h3 class="main-content-heading">Your chapters :</h3>
     <div class="chapters-list">
         {% for chapter in chapters %}
-        <div class="chapter-card-container" style="background-image: url({{ settings.SUBJECT_COLOR_BACKGROUND_IMAGES|get_background_image_url:chapter.subject.color }})">
-
+        <div class="chapter-card-container" id="chapter-container-{{ chapter.id }}" data-color="{{ chapter.subject.color }}">
                 <div class="chapter-card">
-                    <div class="card-heading">
-                        <h4 class="chapter-card-heading">{{ chapter.subject.subject_name }} : {{ chapter.chapter_name }}</h4>
-                        <a href="{% url 'flashcards:revision' chapter.id %}">{{ chapter.chapter_name }}</a>
+                    <div class="chapter-card-heading">
+                        <div class="card-heading-chapter">{{ chapter.chapter_name }}</div>
+                        <div class="card-heading-subject">{{ chapter.subject.subject_name }}</div>
                     </div>
                     <div class="card-count">
-                        {{ chapter.subject.color }}
-                        <p>Revise : 5</p>
-                        <p>Total : 63</p>
+                        Due For Revision : <span class="card-revision-count">{{ chapter.revision_count }}</span>
                     </div>
                 </div>
             </div>
@@ -94,4 +91,37 @@
         </div>
     {% endif %}
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var chapters = document.querySelectorAll(".chapter-card-container");
+
+        chapters.forEach(function(chapter) {
+            var subjectColor = chapter.getAttribute("data-color");
+            var imageUrl = "";
+
+            if (subjectColor == "red") {
+                imageUrl = '/static/images/red_card_bg.png';
+            } else if (subjectColor == "blue") {
+                imageUrl = '/static/images/blue_card_bg.png';
+            } else if (subjectColor == "green") {
+                imageUrl = '/static/images/green_card_bg.png';
+            } else if (subjectColor == "orange") {
+                imageUrl = '/static/images/orange_card_bg.png';
+            } else if (subjectColor == "pink") {
+                imageUrl = '/static/images/pink_card_bg.png';
+            }
+
+            var chapterCard = chapter.querySelector(".chapter-card");
+            chapterCard.style.backgroundImage = `url(${imageUrl})`;
+
+            chapter.addEventListener("click", function() {
+                var chapterId = chapter.id.split('-').pop();
+                var url = "{% url 'flashcards:revision' 0 %}".replace("0", chapterId);
+                window.location.href = url;
+            });
+        });
+    });
+</script>
+
 {% endblock %}
