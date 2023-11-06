@@ -29,9 +29,10 @@
                     {% if user.is_authenticated %}
                     <li class="nav-item"><a class="nav-item-link" href="{% url 'flashcards:home' %}">Home</a></li>
                     <li class="nav-item"><a class="nav-item-link" href="{% url 'flashcards:manage' %}">Manage</a></li>
-                    <li class="nav-item"><a class="nav-item-link" href="{% url 'flashcards:home' %}">Support</a></li>
+                    <li class="nav-item"><a class="nav-item-link" href="{% url 'flashcards:support' %}">Support</a></li>
                     {% else %}
-                    <li class="nav-item"><a class="nav-item-link" href="{% url 'flashcards:home' %}">Support</a></li>
+                    <li class="nav-item"><a class="nav-item-link" href="{% url 'flashcards:home' %}">Home</a></li>  
+                    <li class="nav-item"><a class="nav-item-link" href="{% url 'flashcards:support' %}">Support</a></li>
                     {% endif %}
                 </ul>
             </div>

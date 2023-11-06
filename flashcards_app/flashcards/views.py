@@ -171,3 +171,6 @@ def delete_flashcard(request, flashcard_id) :
         return redirect('flashcards:manage')
     
     return render(request,'flashcards/confirm_deletion.html',{'flashcard':flashcard})
+
+def support(request) :
+    return render(request,'flashcards/support.html')

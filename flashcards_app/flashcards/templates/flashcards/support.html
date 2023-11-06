@@ -1,2 +1,53 @@
-{% extends 'flashcards.base.html' %}
+{% extends 'flashcards\base.html' %}
 {% block content %}
+
+<div class="support-content">
+    <div class="heading">
+        FAQs
+    </div>
+    <div class="support-container">
+        <div class="support-card">
+            <div class="support-question">What is QuickCards?</div>
+            <div class="support-answer">QuickCards revision software is a digital tool designed to 
+                assist with memorization and learning through the use of virtual flashcards. Users 
+                can create digital flashcards with a question on one side and an answer on the other side.
+            </div>
+        </div>
+        <div class="support-card">
+            <div class="support-question">How does it work?</div>
+            <div class="support-answer">
+                The software allows users to review these flashcards at their own pace, testing
+                their own knowledge and comprehension. It's a convenient and effective way to 
+                study and retain information.
+            </div>
+        </div>
+        <div class="support-card">
+            <div class="support-question">Can I create and customize my own cards?</div>
+            <div class="support-answer">
+                Yes, you can create and customize your own cards with QuickCards. Most software platforms
+                offer features that allow you to input a question and an answer, add images or diagrams.
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="footer-brand">
+        <div class="footer-header">
+            <i class="material-icons md-header-light">style</i>
+            <h3 class="nav-header-text-light">QuickCards</h3>
+        </div>
+        <div class="footer-brand-hero">
+            Studies on Steroids
+        </div>
+        <div class="social">
+            <i class="material-icons md-header-light">facebook</i>
+            <i class="material-icons md-header-light">snapchat</i>
+        </div>
+    </div>
+    <div class="footer-links">
+        <li class="nav-item"><a class="nav-item-link footer-link" href="{% url 'flashcards:home' %}">Home</a></li>
+        <li class="nav-item"><a class="nav-item-link footer-link" href="{% url 'flashcards:register' %}">Register</a></li>
+        <li class="nav-item"><a class="nav-item-link footer-link" href="{% url 'flashcards:support' %}">Support</a></li>
+    </div>
+</div>
+{% endblock %}

@@ -16,4 +16,5 @@ urlpatterns = [
     path('add_flashcard/',views.add_flashcard,name='add_flashcard'),
     path('edit_flashcard/<int:flashcard_id>/',views.edit_flashcard,name="edit_flashcard"),
     path('delete_flashcard/<int:flashcard_id>/',views.delete_flashcard,name="delete_flashcard"),
+    path('support/',views.support,name='support'),
 ]

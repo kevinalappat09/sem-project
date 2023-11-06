@@ -88,9 +88,29 @@
                 </div>
             </div>
         </div>
+
     {% endif %}
 </div>
-
+<div class="footer">
+    <div class="footer-brand">
+        <div class="footer-header">
+            <i class="material-icons md-header-light">style</i>
+            <h3 class="nav-header-text-light">QuickCards</h3>
+        </div>
+        <div class="footer-brand-hero">
+            Studies on Steroids
+        </div>
+        <div class="social">
+            <i class="material-icons md-header-light">facebook</i>
+            <i class="material-icons md-header-light">snapchat</i>
+        </div>
+    </div>
+    <div class="footer-links">
+        <li class="nav-item"><a class="nav-item-link footer-link" href="{% url 'flashcards:home' %}">Home</a></li>
+        <li class="nav-item"><a class="nav-item-link footer-link" href="{% url 'flashcards:register' %}">Register</a></li>
+        <li class="nav-item"><a class="nav-item-link footer-link" href="{% url 'flashcards:support' %}">Support</a></li>
+    </div>
+</div>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         var chapters = document.querySelectorAll(".chapter-card-container");
