@@ -59,7 +59,7 @@ class SubjectForm(forms.ModelForm):
         ('pink', 'Pink'),
     )
 
-    subject_color = forms.ChoiceField(
+    color = forms.ChoiceField(
         label='Subject Color',
         choices=COLOR_CHOICES,
         widget=forms.Select(attrs={'class': 'form-input'})

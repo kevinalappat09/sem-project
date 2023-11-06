@@ -102,7 +102,7 @@ def next_flashcard(request, flashcard_id, difficulty):
 
 # Manages all the cards.
 def manage_cards(request) :
-    chapters = Chapter.objects.all()
+    chapters = Chapter.objects.filter(subject__user=request.user)
     selected_chapter_id = request.GET.get('chapter_id')
 
     flashcards = []
@@ -130,9 +130,13 @@ def create_subject(request) :
     if request.method == 'POST':
         form = SubjectForm(request.POST)
         if form.is_valid():
+            # Create an instance of the subject, but don't save it yet
             subject = form.save(commit=False)
+            # Assign the selected color to the subject
+            subject.color = form.cleaned_data['color']
+            # Assign the user
             subject.user = request.user
-            subject.save()
+            subject.save()  # Now save the subject
             return redirect('flashcards:manage')
     else:
         form = SubjectForm()
